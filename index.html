@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Boletín MTC al Día</title>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+        }
+        header, footer {
+            text-align: center;
+            background: #003366;
+            color: white;
+            padding: 20px 0;
+        }
+        h1, h2 {
+            color: #003366;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .three-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .column {
+            flex: 1;
+            min-width: 240px;
+            background: #e8eef5;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .sabias {
+            background: #fef9e7;
+            padding: 20px;
+            border-left: 5px solid #f1c40f;
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+        @media (max-width: 768px) {
+            .three-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header data-aos="fade-down">
+            <h1>Boletín Externo Nº1</h1>
+            <p>31 de julio de 2025</p>
+        </header>
+
+        <section class="section" data-aos="fade-up">
+            <h2>Proyecto del tren Lima – Chosica seguirá adelante</h2>
+            <p>El viceministro Ismael Sutta anunció que se acordó continuar con el proyecto ferroviario priorizando la seguridad.</p>
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </section>
+
+        <section class="section three-column" data-aos="fade-up">
+            <div class="column">
+                <h3>Mantenimiento en Cusco–Puno</h3>
+                <p>Obras entre Santo Tomás y Velille mejorarán la conexión sur.</p>
+            </div>
+            <div class="column">
+                <h3>Mototaxis: nuevas disposiciones</h3>
+                <p>Reglamento de la Ley 31917 fortalece seguridad y formalización.</p>
+            </div>
+            <div class="column">
+                <h3>Vía de Evitamiento Chiclayo</h3>
+                <p>Obra reducirá tiempos de viaje y dinamizará la economía del norte.</p>
+            </div>
+        </section>
+
+        <section class="section sabias" data-aos="fade-right">
+            <h2>¿Sabías que?</h2>
+            <ul>
+                <li>164 estaciones ya brindan señal de TDT en 23 localidades.</li>
+                <li>El 1 de junio se inauguró el nuevo Aeropuerto Jorge Chávez.</li>
+            </ul>
+        </section>
+
+        <footer data-aos="fade-up">
+            <p>www.gob.pe/mtc</p>
+            <p>Síguenos en nuestras redes sociales</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>
