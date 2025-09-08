@@ -38,13 +38,18 @@
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    flex-wrap:wrap; /* permite 2 filas en móvil */
+    flex-wrap:wrap;
   }
-  .header-logo-left,
-  .header-logo-right{
-    height:clamp(34px, 7vw, 56px);
+  .header-logo-left{
+    height:clamp(40px, 8vw, 64px);
     width:auto;
-    max-width:45vw;
+    object-fit:contain;
+    display:block;
+  }
+  .header-logo-right{
+    height:auto;
+    width:clamp(180px, 22vw, 280px);
+    max-height:72px;
     object-fit:contain;
     display:block;
   }
@@ -64,7 +69,7 @@
     .edition{ order:0; flex:0 1 auto; margin:0 8px; }
   }
 
-  /* ===== Nota principal a sangre ===== */
+  /* ===== Nota principal ===== */
   .principal{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#daedfb;align-items:stretch}
   .principal-texto{display:flex;flex-direction:column;justify-content:center;text-align:center;padding:40px}
   .principal-texto .fixed{max-width:620px;margin:0 auto}
@@ -79,10 +84,10 @@
   .boton:hover,.boton-video:hover{background:#cc0029}
   .boton-video::after{content:"►";font-weight:900;line-height:1;transform:translateY(-1px)}
 
-  /* ===== Contenedor fijo para bloques interiores ===== */
+  /* ===== Contenedor ===== */
   .container{max-width:var(--containerMax);margin:0 auto;padding:0 var(--gutter)}
 
-  /* ===== Bloque de noticias (bloque 2) ===== */
+  /* ===== Bloque de noticias ===== */
   .bloque-noticias{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 0 0}
   .noticia{
     background:#e6ecf5;
@@ -242,12 +247,12 @@
     <div class="datos-curiosos">
       <div class="dato">
         <img src="./img/sabias_1.jpg" alt="Dato curioso 1"/>
-        <p>[Dato 1]</p>
+        <p>164 estaciones ya brindan señal de TDT en 23 localidades del país</p>
         <a href="#" class="boton">Ver más</a>
       </div>
       <div class="dato">
         <img src="./img/sabias_2.jpg" alt="Dato curioso 2"/>
-        <p>[Dato 2]</p>
+        <p>El 1 de junio de 2025, fue la inauguración del nuevo Aeropuerto Jorge Chávez.</p>
         <a href="#" class="boton">Ver más</a>
       </div>
     </div>
