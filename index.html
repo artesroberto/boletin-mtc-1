@@ -14,8 +14,8 @@
   :root{
     --azul:#003366;
     --rojo:#ff0033;
-    --containerMax: 1080px;
-    --gutter: 20px;
+    --containerMax:1080px;
+    --gutter:20px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
@@ -38,61 +38,93 @@
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    flex-wrap:wrap;
+    flex-wrap:wrap; /* permite 2 filas en móvil */
   }
+  /* Logo GOB PERÚ */
   .header-logo-left{
     height:clamp(40px, 8vw, 64px);
     width:auto;
     object-fit:contain;
     display:block;
+    flex:0 0 auto;
   }
+  /* Logo “MTC al Día” grande en desktop, controlado en móvil */
   .header-logo-right{
+    width:clamp(220px, 26vw, 340px); /* más grande en desktop */
+    max-height:96px;
     height:auto;
-    width:clamp(180px, 22vw, 280px);
-    max-height:72px;
     object-fit:contain;
     display:block;
+    flex:0 0 auto;
   }
   .edition{
     text-align:center;
     line-height:1.2;
     font-weight:700;
     color:#1b1b1b;
+    flex:0 1 auto;
   }
+  /* Móvil: logos arriba y edición debajo; limitar tamaños */
   @media (max-width:720px){
-    .header-wrap{ justify-content:center; gap:10px 14px; }
-    .edition{ flex:1 1 100%; order:3; margin-top:4px; }
-    .header-logo-left,.header-logo-right{ max-width:42vw; }
+    .header-wrap{
+      justify-content:center;
+      gap:10px 14px;
+    }
+    .edition{
+      flex:1 1 100%;
+      order:3;              /* logos primero, edición debajo */
+      margin-top:4px;
+    }
+    .header-logo-left{ max-width:42vw; }
+    .header-logo-right{
+      width:min(46vw, 180px);
+      max-height:64px;
+    }
   }
-  @media (min-width:721px){
+  /* Desktop amplio: una sola fila sin cortes */
+  @media (min-width:901px){
     .header-wrap{ flex-wrap:nowrap; }
-    .edition{ order:0; flex:0 1 auto; margin:0 8px; }
   }
 
-  /* ===== Nota principal ===== */
-  .principal{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#daedfb;align-items:stretch}
-  .principal-texto{display:flex;flex-direction:column;justify-content:center;text-align:center;padding:40px}
+  /* ===== Nota principal a sangre ===== */
+  .principal{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:#daedfb;align-items:stretch
+  }
+  .principal-texto{
+    display:flex;flex-direction:column;justify-content:center;
+    text-align:center;padding:40px
+  }
   .principal-texto .fixed{max-width:620px;margin:0 auto}
   .principal-imagen img{width:100%;height:100%;object-fit:cover;display:block}
-  .kicker{color:var(--rojo);font-weight:800;text-transform:uppercase;font-size:clamp(12px,1.4vw,16px);margin-bottom:10px}
-  .lead-title{color:var(--azul);font-weight:800;line-height:1.2;font-size:clamp(24px,4vw,42px);margin-bottom:12px}
-  .lead-body{color:#243647;font-size:clamp(14px,2vw,17px);line-height:1.6;margin-bottom:16px}
+  .kicker{
+    color:var(--rojo);font-weight:800;text-transform:uppercase;
+    font-size:clamp(12px,1.4vw,16px);margin-bottom:10px
+  }
+  .lead-title{
+    color:var(--azul);font-weight:800;line-height:1.2;
+    font-size:clamp(24px,4vw,42px);margin-bottom:12px
+  }
+  .lead-body{
+    color:#243647;font-size:clamp(14px,2vw,17px);
+    line-height:1.6;margin-bottom:16px
+  }
   .boton,.boton-video{
-    background:var(--rojo);color:#fff;border:none;border-radius:18px;padding:6px 14px;cursor:pointer;font-size:13px;
-    display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;margin:12px auto 0
+    background:var(--rojo);color:#fff;border:none;border-radius:18px;
+    padding:6px 14px;cursor:pointer;font-size:13px;
+    display:inline-flex;align-items:center;gap:6px;
+    text-decoration:none;font-weight:700;margin:12px auto 0
   }
   .boton:hover,.boton-video:hover{background:#cc0029}
   .boton-video::after{content:"►";font-weight:900;line-height:1;transform:translateY(-1px)}
 
-  /* ===== Contenedor ===== */
+  /* ===== Contenedor fijo ===== */
   .container{max-width:var(--containerMax);margin:0 auto;padding:0 var(--gutter)}
 
   /* ===== Bloque de noticias ===== */
   .bloque-noticias{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 0 0}
   .noticia{
-    background:#e6ecf5;
-    text-align:center;
-    padding:16px;border-radius:10px;
+    background:#e6ecf5;text-align:center;padding:16px;border-radius:10px;
     display:flex;flex-direction:column;gap:10px;
   }
   .noticia h3{
@@ -102,39 +134,40 @@
     font-size:clamp(18px,2vw,22px);
     font-weight:700;
   }
-  .noticia img{width:100%;height:200px;object-fit:cover;display:block;margin:0 auto 8px;border-radius:8px}
+  .noticia img{
+    width:100%;height:200px;object-fit:cover;
+    display:block;margin:0 auto 8px;border-radius:8px
+  }
   .noticia p{
     font-size:clamp(14px,1.55vw,15.5px);
-    line-height:1.45;
-    text-align:justify;
-    text-justify:inter-word;
-    hyphens:auto;
+    line-height:1.45;text-align:justify;text-justify:inter-word;hyphens:auto;
     margin:0 12px 6px;
   }
   .noticia .boton{margin:8px auto 0}
 
   /* ===== Banda azul ===== */
   .band-azul{
-    background:#243E86;
-    color:#fff;
-    margin:0;
-    padding:36px 0;
-    text-align:center;
+    background:#243E86;color:#fff;margin:0;padding:36px 0;text-align:center;
   }
   .band-azul .container{display:flex;flex-direction:column;align-items:center;gap:10px}
-  .band-azul .kicker-azul{color:#8ec5ff;font-weight:700;font-style:italic;font-size:clamp(14px,1.6vw,18px)}
-  .band-azul .quote-title{color:#fff;font-weight:800;line-height:1.15;font-size:clamp(26px,3.6vw,48px);max-width:var(--containerMax)}
+  .band-azul .kicker-azul{
+    color:#8ec5ff;font-weight:700;font-style:italic;
+    font-size:clamp(14px,1.6vw,18px)
+  }
+  .band-azul .quote-title{
+    color:#fff;font-weight:800;line-height:1.15;
+    font-size:clamp(26px,3.6vw,48px);max-width:var(--containerMax)
+  }
   .band-azul .author{color:#8ec5ff;font-weight:700;font-size:clamp(12px,1.4vw,16px)}
 
   /* ===== Banda celeste ===== */
   .band-celeste{
-    background:#53C7EE;
-    margin:0;
-    padding:22px 0;
-    text-align:center;
+    background:#53C7EE;margin:0;padding:22px 0;text-align:center;
   }
   .band-celeste .container{display:flex;flex-direction:column;align-items:center;gap:14px}
-  .band-celeste .sabias-logo{width:min(520px,90%);height:100px;display:flex;align-items:center;justify-content:center}
+  .band-celeste .sabias-logo{
+    width:min(520px,90%);height:100px;display:flex;align-items:center;justify-content:center
+  }
   .band-celeste .sabias-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 
   /* ===== Sección ¿Sabías que? ===== */
@@ -144,13 +177,13 @@
     background:#eee;text-align:center;padding:16px;border-radius:10px;
     display:flex;flex-direction:column;gap:10px;
   }
-  .dato img{width:100%;height:200px;object-fit:cover;display:block;margin:0 auto 6px;border-radius:8px}
+  .dato img{
+    width:100%;height:200px;object-fit:cover;
+    display:block;margin:0 auto 6px;border-radius:8px
+  }
   .dato p{
     font-size:clamp(14px,1.55vw,15.5px);
-    line-height:1.45;
-    text-align:justify;
-    text-justify:inter-word;
-    hyphens:auto;
+    line-height:1.45;text-align:justify;text-justify:inter-word;hyphens:auto;
     margin:0 12px 6px;
   }
 
@@ -158,7 +191,10 @@
   footer{background:#002b5c;color:#fff;text-align:center;padding:20px}
   footer p{margin:4px 0}
   footer .redes{margin-top:10px}
-  footer .redes a{margin:0 8px;display:inline-block;color:#fff !important;text-decoration:none;font-weight:500}
+  footer .redes a{
+    margin:0 8px;display:inline-block;color:#fff !important;
+    text-decoration:none;font-weight:500
+  }
   footer .redes a:visited{color:#fff !important}
   footer .redes a:hover{color:#fff !important;text-decoration:underline}
 
@@ -206,7 +242,7 @@
       <article class="noticia">
         <h3>MTC inaugura almacenes de antracita en el Puerto de Salaverry</h3>
         <img src="./img/noticia_1.jpg" alt="Noticia secundaria 1"/>
-        <p>El MTC inauguró almacenes de antracita en el Terminal Portuario de Salaverry. La inversión supera los US$10 millones e incluye cuatro zonas de almacenamiento, vías de acceso, módulos, muros perimétricos, paravientos y servicios sanitarios y eléctricos. La obra, vía APP, optimiza la logística y fortalece la capacidad exportadora de antracita de La Libertad y Cajamarca. El ministro César Sandoval destacó su impacto en empleo y competitividad.</p>
+        <p>El MTC inauguró almacenes de antracita en el Terminal Portuario de Salaverry. La inversión supera los US$10 millones e incluye cuatro zonas de almacenamiento, vías de acceso, módulos, muros perimetrales, paravientos y servicios sanitarios y eléctricos. La obra, vía APP, optimiza la logística y fortalece la capacidad exportadora de antracita de La Libertad y Cajamarca. El ministro César Sandoval destacó su impacto en empleo y competitividad.</p>
         <a href="#" class="boton">Ver más</a>
       </article>
       <article class="noticia">
@@ -247,12 +283,12 @@
     <div class="datos-curiosos">
       <div class="dato">
         <img src="./img/sabias_1.jpg" alt="Dato curioso 1"/>
-        <p>164 estaciones ya brindan señal de TDT en 23 localidades del país</p>
+        <p>[Dato 1]</p>
         <a href="#" class="boton">Ver más</a>
       </div>
       <div class="dato">
         <img src="./img/sabias_2.jpg" alt="Dato curioso 2"/>
-        <p>El 1 de junio de 2025, fue la inauguración del nuevo Aeropuerto Jorge Chávez.</p>
+        <p>[Dato 2]</p>
         <a href="#" class="boton">Ver más</a>
       </div>
     </div>
