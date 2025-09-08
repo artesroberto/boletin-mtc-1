@@ -4,6 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Boletín MTC</title>
+
+<!-- Google Fonts: Lato -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --azul:#003366;
@@ -12,15 +18,29 @@
     --gutter: 20px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:#1b1b1b}
+  body{
+    font-family:'Lato', Arial, Helvetica, sans-serif;
+    background:#fff;color:#1b1b1b;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
 
   /* ===== Header (50% más alto) ===== */
   header{
     background:#fff;
     padding:15px 20px; /* antes 10px */
-    display:flex;justify-content:space-between;align-items:center
+    display:grid;
+    grid-template-columns:auto 1fr auto; /* izq | centro | der */
+    align-items:center;
+    column-gap:12px;
   }
-  .header-logo{height:54px;object-fit:contain} /* antes 36px */
+  .header-logo-left{height:54px;object-fit:contain} /* antes 36px */
+  .header-logo-right{
+    width:clamp(150px,14vw,240px); /* crece sin romper */
+    height:auto;
+    object-fit:contain;
+  }
+  .edition{ text-align:center; line-height:1.2; }
 
   /* ===== Nota principal a sangre ===== */
   .principal{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#daedfb;align-items:stretch}
@@ -43,9 +63,29 @@
 
   /* ===== Bloque de noticias (bloque 2) responsive con ancho fijo centrado ===== */
   .bloque-noticias{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 0 0}
-  .noticia{background:#e6ecf5;text-align:center;padding:16px;border-radius:10px}
-  .noticia h3{margin-bottom:8px}
-  .noticia img{width:100%;height:200px;object-fit:cover;display:block;margin-bottom:10px;border-radius:8px}
+  .noticia{
+    background:#e6ecf5;
+    text-align:center;
+    padding:16px;border-radius:10px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .noticia h3{
+    color:var(--azul);
+    margin:0 10px 6px;
+    line-height:1.25;
+    font-size:clamp(18px,2vw,22px);
+    font-weight:700;
+  }
+  .noticia img{width:100%;height:200px;object-fit:cover;display:block;margin:0 auto 8px;border-radius:8px}
+  .noticia p{
+    font-size:clamp(14px,1.55vw,15.5px); /* un poco menor al body */
+    line-height:1.45;
+    text-align:justify;
+    text-justify:inter-word;
+    hyphens:auto;
+    margin:0 12px 6px;
+  }
+  .noticia .boton{margin:8px auto 0} /* centra el botón */
 
   /* ===== Banda azul (sin margen con lo anterior/posterior) ===== */
   .band-azul{
@@ -74,8 +114,19 @@
   /* ===== Sección ¿Sabías que? (bloque 3) con ancho fijo centrado ===== */
   .sabias-que{padding:0 0 20px;background:#fff}
   .datos-curiosos{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .dato{background:#eee;text-align:center;padding:16px;border-radius:10px}
-  .dato img{width:100%;height:200px;object-fit:cover;display:block;margin-bottom:10px;border-radius:8px}
+  .dato{
+    background:#eee;text-align:center;padding:16px;border-radius:10px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .dato img{width:100%;height:200px;object-fit:cover;display:block;margin:0 auto 6px;border-radius:8px}
+  .dato p{
+    font-size:clamp(14px,1.55vw,15.5px);
+    line-height:1.45;
+    text-align:justify;
+    text-justify:inter-word;
+    hyphens:auto;
+    margin:0 12px 6px;
+  }
 
   /* ===== Footer con links blancos forzados ===== */
   footer{background:#002b5c;color:#fff;text-align:center;padding:20px}
@@ -88,9 +139,10 @@
   /* ===== Responsivo ===== */
   @media (max-width:980px){.bloque-noticias{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:720px){
-    header{flex-direction:column;gap:6px}
+    header{grid-template-columns:auto 1fr auto;gap:6px}
     .principal{grid-template-columns:1fr}
     .noticia img,.dato img{height:180px}
+    .header-logo-right{width:140px}
   }
   @media (max-width:640px){
     .bloque-noticias{grid-template-columns:1fr}
@@ -101,9 +153,9 @@
 <body>
 
 <header>
-  <div><img src="./img/logo_mtc.png" alt="Logo MTC" class="header-logo"/></div>
-  <div>Edición º1<br><small>14 de agosto 2025</small></div>
-  <div><img src="./img/logo_mtc_al_dia.png" alt="Logo MTC al Día" class="header-logo" width="200"/></div>
+  <div><img src="./img/logo_mtc.png" alt="Logo MTC" class="header-logo-left"></div>
+  <div class="edition">Edición º1<br><small>14 de agosto 2025</small></div>
+  <div><img src="./img/logo_mtc_al_dia.png" alt="Logo MTC al Día" class="header-logo-right"></div>
 </header>
 
 <!-- NOTA PRINCIPAL -->
@@ -125,9 +177,24 @@
 <section>
   <div class="container">
     <div class="bloque-noticias">
-      <article class="noticia"><h3>MTC inaugura almacenes de antracita en el Puerto de Salaverry</h3><img src="./img/noticia_1.jpg" alt="Noticia secundaria 1"/><p>El MTC inauguró almacenes de antracita en el Terminal Portuario de Salaverry. La inversión supera los US$10 millones e incluye cuatro zonas de almacenamiento, vías de acceso, módulos, muros perimétricos, paravientos y servicios sanitarios y eléctricos. La obra, vía APP, optimiza la logística y fortalece la capacidad exportadora de antracita de La Libertad y Cajamarca. El ministro César Sandoval destacó su impacto en empleo y competitividad.</p><a href="#" class="boton">Ver más</a></article>
-      <article class="noticia"><h3>MTC reanuda vuelos nocturnos en el aeropuerto de Piura</h3><img src="./img/noticia_2.jpg" alt="Noticia secundaria 2"/><p>El MTC informó que el aeropuerto Capitán FAP Guillermo Concha Íberico retomó los vuelos nocturnos gracias a nueva infraestructura: moderno sistema de luces, drenaje y mejoramiento de pista, con inversión mayor a US$53 millones. Suspendidos desde junio de 2024, los vuelos nocturnos vuelven para dinamizar turismo y actividad comercial. Se prevén 10 vuelos diarios (9 diurnos y 1 nocturno), elevando el flujo mensual estimado de 80 mil a 94 mil pasajeros.</p><a href="#" class="boton">Ver más</a></article>
-      <article class="noticia"><h3>Estación San Marcos del Metro de Lima alcanza 76.2% de avance</h3><img src="./img/noticia_3.jpg" alt="Noticia secundaria 3"/><p>El MTC informó que la estación San Marcos de la Línea 2 alcanzó 76.2% de avance en obras civiles. Será la primera estación subterránea ubicada dentro de un campus universitario y beneficiará directamente a 45 mil estudiantes de la UNMSM. Actualmente se ejecutan excavaciones, encofrado, armado de acero y vaciado de la losa de cubierta, además del descabezado de muros pantalla, mejorando la accesibilidad y seguridad.</p><a href="#" class="boton">Ver más</a></article>
+      <article class="noticia">
+        <h3>MTC inaugura almacenes de antracita en el Puerto de Salaverry</h3>
+        <img src="./img/noticia_1.jpg" alt="Noticia secundaria 1"/>
+        <p>El MTC inauguró almacenes de antracita en el Terminal Portuario de Salaverry. La inversión supera los US$10 millones e incluye cuatro zonas de almacenamiento, vías de acceso, módulos, muros perimétricos, paravientos y servicios sanitarios y eléctricos. La obra, vía APP, optimiza la logística y fortalece la capacidad exportadora de antracita de La Libertad y Cajamarca. El ministro César Sandoval destacó su impacto en empleo y competitividad.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
+      <article class="noticia">
+        <h3>MTC reanuda vuelos nocturnos en el aeropuerto de Piura</h3>
+        <img src="./img/noticia_2.jpg" alt="Noticia secundaria 2"/>
+        <p>El MTC informó que el aeropuerto Capitán FAP Guillermo Concha Íberico retomó los vuelos nocturnos gracias a nueva infraestructura: moderno sistema de luces, drenaje y mejoramiento de pista, con inversión mayor a US$53 millones. Suspendidos desde junio de 2024, los vuelos nocturnos vuelven para dinamizar turismo y actividad comercial. Se prevén 10 vuelos diarios (9 diurnos y 1 nocturno), elevando el flujo mensual estimado de 80 mil a 94 mil pasajeros.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
+      <article class="noticia">
+        <h3>Estación San Marcos del Metro de Lima alcanza 76.2% de avance</h3>
+        <img src="./img/noticia_3.jpg" alt="Noticia secundaria 3"/>
+        <p>El MTC informó que la estación San Marcos de la Línea 2 alcanzó 76.2% de avance en obras civiles. Será la primera estación subterránea ubicada dentro de un campus universitario y beneficiará directamente a 45 mil estudiantes de la UNMSM. Actualmente se ejecutan excavaciones, encofrado, armado de acero y vaciado de la losa de cubierta, además del descabezado de muros pantalla, mejorando la accesibilidad y seguridad.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
     </div>
   </div>
 </section>
@@ -152,8 +219,16 @@
 <section class="sabias-que">
   <div class="container">
     <div class="datos-curiosos">
-      <div class="dato"><img src="./img/sabias_1.jpg" alt="Dato curioso 1"/><p>[Dato 1]</p><a href="#" class="boton">Ver más</a></div>
-      <div class="dato"><img src="./img/sabias_2.jpg" alt="Dato curioso 2"/><p>[Dato 2]</p><a href="#" class="boton">Ver más</a></div>
+      <div class="dato">
+        <img src="./img/sabias_1.jpg" alt="Dato curioso 1"/>
+        <p>[Dato 1]</p>
+        <a href="#" class="boton">Ver más</a>
+      </div>
+      <div class="dato">
+        <img src="./img/sabias_2.jpg" alt="Dato curioso 2"/>
+        <p>[Dato 2]</p>
+        <a href="#" class="boton">Ver más</a>
+      </div>
     </div>
   </div>
 </section>
