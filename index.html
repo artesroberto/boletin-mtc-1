@@ -1,159 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boletín MTC</title>
-  <style>
-    :root {
-      --azul: #003366;
-      --rojo: #ff0033;
-      --containerMax: 1080px;
-      --gutter: 20px;
-    }
-    * {box-sizing: border-box; margin: 0; padding: 0}
-    body {
-      font-family: 'Lato', Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #1b1b1b;
-      line-height: 1.5;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Boletín MTC</title>
 
-    /* ===== Header ===== */
-    header {
-      background: #fff;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: var(--containerMax);
-      margin: 0 auto;
-    }
-    .header-logo {
-      height: 64px;
-      object-fit: contain;
-    }
+<!-- Google Fonts: Lato -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 
-    /* ===== Principal Section ===== */
-    .principal {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      background: #daedfb;
-      align-items: stretch;
-      max-width: var(--containerMax);
-      margin: 0 auto;
-    }
-    .principal-text {
-      padding: 40px 30px;
-    }
-    .principal-text h2 {
-      color: var(--azul);
-      font-size: 2rem;
-      font-weight: 900; /* más gruesa */
-      margin-bottom: 15px;
-    }
-    .principal-text p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
-    .principal-text .btn {
-      display: inline-block;
-      background: var(--rojo);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .principal img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+<style>
+  :root{
+    --azul:#003366;
+    --rojo:#ff0033;
+    --containerMax:1080px;
+    --gutter:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Lato', Arial, Helvetica, sans-serif;
+    background:#fff;color:#1b1b1b;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
 
-    /* ===== Noticias Secundarias ===== */
-    .noticias {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 30px var(--gutter);
-      max-width: var(--containerMax);
-      margin: 0 auto;
+  /* ===== Header responsive robusto ===== */
+  header{
+    background:#fff;
+    border-bottom:1px solid #eef2f7;
+  }
+  .header-wrap{
+    max-width:var(--containerMax);
+    margin:0 auto;
+    padding:15px var(--gutter);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap; /* permite 2 filas en móvil */
+  }
+  /* Logo GOB PERÚ */
+  .header-logo-left{
+    height:clamp(40px, 8vw, 64px);
+    width:auto;
+    object-fit:contain;
+    display:block;
+    flex:0 0 auto;
+  }
+  /* Logo “MTC al Día” grande en desktop, controlado en móvil */
+  .header-logo-right{
+    width:clamp(220px, 26vw, 340px); /* más grande en desktop */
+    max-height:96px;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    flex:0 0 auto;
+  }
+  .edition{
+    text-align:center;
+    line-height:1.2;
+    font-weight:700;
+    color:#1b1b1b;
+    flex:0 1 auto;
+  }
+  /* Móvil: logos arriba y edición debajo; limitar tamaños */
+  @media (max-width:720px){
+    .header-wrap{
+      justify-content:center;
+      gap:10px 14px;
     }
-    .noticia {
-      background: #f5f9ff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    .edition{
+      flex:1 1 100%;
+      order:3;              /* logos primero, edición debajo */
+      margin-top:4px;
     }
-    .noticia img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
+    .header-logo-left{ max-width:42vw; }
+    .header-logo-right{
+      width:min(46vw, 180px);
+      max-height:64px;
     }
-    .noticia h3 {
-      font-size: 1.2rem;
-      font-weight: 800; /* más gruesa */
-      color: var(--azul);
-      padding: 15px;
-    }
-    .noticia p {
-      padding: 0 15px 20px;
-      font-size: 0.95rem;
-    }
+  }
+  /* Desktop amplio: una sola fila sin cortes */
+  @media (min-width:901px){
+    .header-wrap{ flex-wrap:nowrap; }
+  }
 
-    /* ===== Responsive ===== */
-    @media(max-width:768px){
-      .principal {
-        grid-template-columns: 1fr;
-      }
-      .principal-text {
-        padding: 20px;
-      }
-      .principal-text h2 {
-        font-size: 1.6rem;
-      }
-    }
-  </style>
+  /* ===== Nota principal a sangre ===== */
+  .principal{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:#daedfb;align-items:stretch
+  }
+  .principal-texto{
+    display:flex;flex-direction:column;justify-content:center;
+    text-align:center;padding:40px
+  }
+  .principal-texto .fixed{max-width:620px;margin:0 auto}
+  .principal-imagen img{width:100%;height:100%;object-fit:cover;display:block}
+  .kicker{
+    color:var(--rojo);font-weight:800;text-transform:uppercase;
+    font-size:clamp(12px,1.4vw,16px);margin-bottom:10px
+  }
+  .lead-title{
+    color:var(--azul);font-weight:900;line-height:1.2; /* más grueso */
+    font-size:clamp(24px,4vw,42px);margin-bottom:12px
+  }
+  .lead-body{
+    color:#243647;font-size:clamp(14px,2vw,17px);
+    line-height:1.6;margin-bottom:16px
+  }
+  .boton,.boton-video{
+    background:var(--rojo);color:#fff;border:none;border-radius:18px;
+    padding:6px 14px;cursor:pointer;font-size:13px;
+    display:inline-flex;align-items:center;gap:6px;
+    text-decoration:none;font-weight:700;margin:12px auto 0
+  }
+  .boton:hover,.boton-video:hover{background:#cc0029}
+  .boton-video::after{content:"►";font-weight:900;line-height:1;transform:translateY(-1px)}
+
+  /* ===== Contenedor fijo ===== */
+  .container{max-width:var(--containerMax);margin:0 auto;padding:0 var(--gutter)}
+
+  /* ===== Bloque de noticias ===== */
+  .bloque-noticias{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 0 0}
+  .noticia{
+    background:#e6ecf5;text-align:center;padding:16px;border-radius:10px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .noticia h3{
+    color:var(--azul);
+    margin:0 10px 6px;
+    line-height:1.25;
+    font-size:clamp(18px,2vw,22px);
+    font-weight:900; /* más grueso */
+  }
+  .noticia img{
+    width:100%;height:200px;object-fit:cover;
+    display:block;margin:0 auto 8px;border-radius:8px
+  }
+  .noticia p{
+    font-size:clamp(14px,1.55vw,15.5px);
+    line-height:1.45;text-align:justify;text-justify:inter-word;hyphens:auto;
+    margin:0 12px 6px;
+  }
+  .noticia .boton{margin:8px auto 0}
+
+  /* ===== Banda azul ===== */
+  .band-azul{
+    background:#243E86;color:#fff;margin:0;padding:36px 0;text-align:center;
+  }
+  .band-azul .container{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .band-azul .kicker-azul{
+    color:#8ec5ff;font-weight:700;font-style:italic;
+    font-size:clamp(14px,1.6vw,18px)
+  }
+  .band-azul .quote-title{
+    color:#fff;font-weight:800;line-height:1.15;
+    font-size:clamp(26px,3.6vw,48px);max-width:var(--containerMax)
+  }
+  .band-azul .author{color:#8ec5ff;font-weight:700;font-size:clamp(12px,1.4vw,16px)}
+
+  /* ===== Banda celeste ===== */
+  .band-celeste{
+    background:#53C7EE;margin:0;padding:22px 0;text-align:center;
+  }
+  .band-celeste .container{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .band-celeste .sabias-logo{
+    width:min(520px,90%);height:100px;display:flex;align-items:center;justify-content:center
+  }
+  .band-celeste .sabias-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+
+  /* ===== Sección ¿Sabías que? ===== */
+  .sabias-que{padding:0 0 20px;background:#fff}
+  .datos-curiosos{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .dato{
+    background:#eee;text-align:center;padding:16px;border-radius:10px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .dato img{
+    width:100%;height:200px;object-fit:cover;
+    display:block;margin:0 auto 6px;border-radius:8px
+  }
+  .dato p{
+    font-size:clamp(14px,1.55vw,15.5px);
+    line-height:1.45;text-align:justify;text-justify:inter-word;hyphens:auto;
+    margin:0 12px 6px;
+  }
+
+  /* ===== Footer ===== */
+  footer{background:#002b5c;color:#fff;text-align:center;padding:20px}
+  footer p{margin:4px 0}
+  footer .redes{margin-top:10px}
+  footer .redes a{
+    margin:0 8px;display:inline-block;color:#fff !important;
+    text-decoration:none;font-weight:500
+  }
+  footer .redes a:visited{color:#fff !important}
+  footer .redes a:hover{color:#fff !important;text-decoration:underline}
+
+  /* ===== Responsivo ===== */
+  @media (max-width:980px){.bloque-noticias{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){
+    .principal{grid-template-columns:1fr}
+    .noticia img,.dato img{height:180px}
+  }
+  @media (max-width:640px){
+    .bloque-noticias{grid-template-columns:1fr}
+    .datos-curiosos{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <img src="img/logo_mtc.png" alt="Logo MTC" class="header-logo" />
-    <div>
-      <p>Edición *1<br>14 de agosto 2025</p>
-    </div>
-  </header>
 
-  <!-- Principal -->
-  <section class="principal">
-    <div class="principal-text">
-      <p style="color:#ff0033;font-weight:700">MEJORAS EN EL TRANSPORTE PÚBLICO</p>
-      <h2>¡Nueva ruta del Corredor Azul trasladará más de 6000 mil usuarios al día!</h2>
-      <p>El MTC anunció un nuevo servicio del Corredor Azul que conectará San Martín de Porres con el Cercado de Lima. La ruta beneficiará a miles de vecinos al ofrecer un traslado más rápido, seguro y directo hacia el centro...</p>
-      <a href="#" class="btn">Ver video ▶</a>
-    </div>
-    <img src="img/corredor_azul.jpg" alt="Corredor Azul">
-  </section>
+<header>
+  <div class="header-wrap">
+    <img src="./img/logo_mtc.png" alt="Logo MTC" class="header-logo-left">
+    <div class="edition">Edición º1<br><small>14 de agosto 2025</small></div>
+    <img src="./img/logo_mtc_al_dia.png" alt="Logo MTC al Día" class="header-logo-right">
+  </div>
+</header>
 
-  <!-- Noticias -->
-  <section class="noticias">
-    <article class="noticia">
-      <img src="img/salaverry.jpg" alt="Puerto de Salaverry">
-      <h3>MTC inaugura almacenes de antracita en el Puerto de Salaverry</h3>
-      <p>El MTC inauguró almacenes de antracita en el Puerto de Salaverry...</p>
-    </article>
-    <article class="noticia">
-      <img src="img/piura.jpg" alt="Aeropuerto de Piura">
-      <h3>MTC reanuda vuelos nocturnos en el aeropuerto de Piura</h3>
-      <p>El MTC informó que el aeropuerto Capitán FAP Guillermo Concha Iberico de Piura retomó vuelos nocturnos...</p>
-    </article>
-    <article class="noticia">
-      <img src="img/san_marcos.jpg" alt="Estación San Marcos">
-      <h3>Estación San Marcos del Metro de Lima alcanza 76.2% de avance</h3>
-      <p>El MTC informó que la estación San Marcos del Metro de Lima alcanza un 76.2% de avance en obras civiles...</p>
-    </article>
-  </section>
+<!-- NOTA PRINCIPAL -->
+<section class="principal">
+  <div class="principal-texto">
+    <div class="fixed">
+      <p class="kicker">Mejoras en el transporte público</p>
+      <h1 class="lead-title">¡Nueva ruta del Corredor Azul trasladará más de 6000 mil usuarios al día!</h1>
+      <p class="lead-body">El MTC anunció un nuevo servicio del Corredor Azul que conectará San Martín de Porres con el Cercado de Lima. La ruta beneficiará a miles de vecinos al ofrecer un traslado más rápido, seguro y directo hacia el centro. La medida busca mejorar la conectividad, reducir los tiempos de viaje y fortalecer la oferta de transporte público sostenible en la capital.</p>
+      <a class="boton-video" href="#">Ver video</a>
+    </div>
+  </div>
+  <div class="principal-imagen">
+    <img src="./img/hero_principal.jpg" alt="Noticia principal"/>
+  </div>
+</section>
+
+<!-- BLOQUE NOTICIAS -->
+<section>
+  <div class="container">
+    <div class="bloque-noticias">
+      <article class="noticia">
+        <h3>MTC inaugura almacenes de antracita en el Puerto de Salaverry</h3>
+        <img src="./img/noticia_1.jpg" alt="Noticia secundaria 1"/>
+        <p>El MTC inauguró almacenes de antracita en el Terminal Portuario de Salaverry. La inversión supera los US$10 millones e incluye cuatro zonas de almacenamiento, vías de acceso, módulos, muros perimetrales, paravientos y servicios sanitarios y eléctricos. La obra, vía APP, optimiza la logística y fortalece la capacidad exportadora de antracita de La Libertad y Cajamarca. El ministro César Sandoval destacó su impacto en empleo y competitividad.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
+      <article class="noticia">
+        <h3>MTC reanuda vuelos nocturnos en el aeropuerto de Piura</h3>
+        <img src="./img/noticia_2.jpg" alt="Noticia secundaria 2"/>
+        <p>El MTC informó que el aeropuerto Capitán FAP Guillermo Concha Íberico retomó los vuelos nocturnos gracias a nueva infraestructura: moderno sistema de luces, drenaje y mejoramiento de pista, con inversión mayor a US$53 millones. Suspendidos desde junio de 2024, los vuelos nocturnos vuelven para dinamizar turismo y actividad comercial. Se prevén 10 vuelos diarios (9 diurnos y 1 nocturno), elevando el flujo mensual estimado de 80 mil a 94 mil pasajeros.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
+      <article class="noticia">
+        <h3>Estación San Marcos del Metro de Lima alcanza 76.2% de avance</h3>
+        <img src="./img/noticia_3.jpg" alt="Noticia secundaria 3"/>
+        <p>El MTC informó que la estación San Marcos de la Línea 2 alcanzó 76.2% de avance en obras civiles. Será la primera estación subterránea ubicada dentro de un campus universitario y beneficiará directamente a 45 mil estudiantes de la UNMSM. Actualmente se ejecutan excavaciones, encofrado, armado de acero y vaciado de la losa de cubierta, además del descabezado de muros pantalla, mejorando la accesibilidad y seguridad.</p>
+        <a href="#" class="boton">Ver más</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BANDA AZUL -->
+<section class="band-azul">
+  <div class="container">
+    <div class="kicker-azul">Tren Lima Chosica</div>
+    <div class="quote-title">Ajusté el ancho fijo y centrado</div>
+    <div class="author">César Sandoval Pozo | Ministerio de Transportes y Comunicaciones</div>
+  </div>
+</section>
+
+<!-- BANDA CELESTE -->
+<section class="band-celeste">
+  <div class="container">
+    <div class="sabias-logo"><img src="./img/sabias_titulo.png" alt="¿Sabías que?"></div>
+  </div>
+</section>
+
+<!-- SABÍAS QUE -->
+<section class="sabias-que">
+  <div class="container">
+    <div class="datos-curiosos">
+      <div class="dato">
+        <!-- Cambiado a GIF -->
+        <img src="./img/sabias_1.gif" alt="Dato curioso 1 (GIF)"/>
+        <p>[Dato 1]</p>
+        <a href="#" class="boton">Ver más</a>
+      </div>
+      <div class="dato">
+        <!-- Cambiado a GIF -->
+        <img src="./img/sabias_2.gif" alt="Dato curioso 2 (GIF)"/>
+        <p>[Dato 2]</p>
+        <a href="#" class="boton">Ver más</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>www.gob.pe/mtc</p>
+  <p>Síguenos en nuestras redes sociales</p>
+  <div class="redes">
+    <a href="https://www.facebook.com/MTC.Peru" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://x.com/MTC_GobPeru" target="_blank" rel="noopener">X</a>
+    <a href="https://www.instagram.com/mtc.oficial" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/@mtc_gobperu" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.youtube.com/MTCPERUOFICIAL" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.linkedin.com/company/mtc-peru" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
 </body>
 </html>
