@@ -14,6 +14,7 @@
   :root{
     --azul:#003366;
     --rojo:#ff0033;
+    --celeste:#00c3f6;
     --containerMax:1080px;
     --gutter:20px;
   }
@@ -67,10 +68,15 @@
     .header-logo-right{ width:min(46vw, 180px); max-height:64px; }
   }
 
-  /* ===== Nota principal ===== */
+  /* ===== Nota principal con fondo celeste tramado ===== */
   .principal{
-    display:grid;grid-template-columns:1fr 1fr;gap:0;
-    background:#daedfb;align-items:stretch
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    align-items:stretch;
+    background-color:var(--celeste);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='none' stroke='%23ffffff' stroke-width='2'><path d='M0 20h40M20 0v40'/></svg>");
+    background-size:40px 40px;
   }
   .principal-texto{
     display:flex;flex-direction:column;justify-content:center;
@@ -83,7 +89,7 @@
     font-size:clamp(12px,1.4vw,16px);margin-bottom:10px
   }
   .lead-title{
-    color:var(--azul);font-weight:800;line-height:1.2; /* ExtraBold */
+    color:var(--azul);font-weight:800;line-height:1.2;
     font-size:clamp(24px,4vw,42px);margin-bottom:12px
   }
   .lead-body{
@@ -109,7 +115,7 @@
   .noticia h3{
     color:var(--azul);margin:0 10px 6px;
     line-height:1.25;font-size:clamp(18px,2vw,22px);
-    font-weight:800; /* ExtraBold */
+    font-weight:800;
   }
   .noticia img{
     width:100%;height:200px;object-fit:cover;
@@ -126,7 +132,7 @@
   .datos-curiosos{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
   .dato{
     background:#eee;text-align:center;padding:16px;border-radius:10px;
-    display:flex;flex-direction:column;gap:10px;position:relative;
+    display:flex;flex-direction:column;gap:10px;
   }
   .dato img{width:100%;height:200px;object-fit:cover;border-radius:8px}
   .dato p{font-size:clamp(14px,1.55vw,15.5px);line-height:1.45;margin:0 12px 6px}
@@ -158,7 +164,6 @@
   <div class="header-wrap">
     <img src="./img/logo_mtc.png" alt="Logo MTC" class="header-logo-left">
     <div class="edition">Edición º1<br><small>14 de agosto 2025</small></div>
-    <!-- Logo MTC al Día como GIF animado -->
     <img src="./img/logo_mtc_al_dia.gif" alt="Logo MTC al Día (animado)" class="header-logo-right">
   </div>
 </header>
@@ -174,7 +179,6 @@
     </div>
   </div>
   <div class="principal-imagen">
-    <!-- Noticia principal ahora como GIF animado -->
     <img src="./img/hero_principal.gif" alt="Noticia principal animada"/>
   </div>
 </section>
