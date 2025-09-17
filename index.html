@@ -16,6 +16,8 @@
     --rojo:#ff0033;
     --celeste-base:#00c3f6;  /* fondo base */
     --celeste-trama:#62c9f4; /* color del tramado */
+    --band-azul:#2f54a3;     /* azul cajón */
+    --text-azul-claro:#8ec5ff;
     --containerMax:1080px;
     --gutter:20px;
   }
@@ -64,11 +66,7 @@
   /* ===== Nota principal con fondo celeste + tramado ===== */
   .principal{
     display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;
-
-    /* base */
     background-color:var(--celeste-base);
-
-    /* tramado (SVG embebido) */
     background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>\
   <rect width='64' height='64' fill='%2300c3f6'/>\
@@ -92,25 +90,25 @@
   }
   .principal-texto .fixed{max-width:620px;margin:0 auto}
 
-  /* === Imagen de la mano/telefono más grande e impactante === */
+  /* Imagen mano/telefono más grande e impactante */
   .principal-imagen{
     position:relative;
     display:flex;
     align-items:center;
-    justify-content:flex-end; /* pegado a la derecha */
-    overflow:hidden;          /* recorta el exceso al agrandar */
+    justify-content:flex-end;
+    overflow:hidden;
   }
   .principal-imagen img{
-    width:140%;              /* impacto en desktop */
-    max-width:none;          /* evita limitar por contenedor */
+    width:200%;
+    max-width:none;
     height:auto;
     object-fit:cover;
-    object-position:center right; /* prioridad a la mano/teléfono */
-    transform:translateX(5%);     /* un pelín más hacia la derecha */
+    object-position:center right;
+    transform:translateX(5%);
     display:block;
   }
 
-  /* === VOLADA (kicker) actualizada === */
+  /* VOLADA (kicker) */
   .kicker{
     color:#ffffff;
     font-weight:800;
@@ -118,13 +116,10 @@
     font-size:clamp(24px, 2.8vw, 32px);
     margin-bottom:14px;
     letter-spacing:.02em;
-    text-shadow:
-      0 1px 0 rgba(0,0,0,.12),
-      0 2px 4px rgba(0,0,0,.18);
+    text-shadow:0 1px 0 rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.18);
     display:inline-block;
     padding:0 .1em;
   }
-
   .lead-title{
     color:var(--azul);font-weight:800;line-height:1.2;
     font-size:clamp(24px,4vw,42px);margin-bottom:12px
@@ -154,7 +149,61 @@
   .noticia p{font-size:clamp(14px,1.55vw,15.5px);line-height:1.45;text-align:justify;margin:0 12px 6px}
   .noticia .boton{margin:8px auto 0}
 
-  /* ===== Sección ¿Sabías que? ===== */
+  /* ===== Cajón AZUL (a sangre) ===== */
+  .band-azul{
+    background:var(--band-azul);
+    color:#fff;
+    margin:0;               /* sin márgenes */
+    padding:36px 0;         /* respiración vertical */
+    text-align:center;
+  }
+  .band-azul .wrap{
+    max-width:var(--containerMax);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
+  .band-azul .kicker-azul{
+    color:var(--text-azul-claro);
+    font-weight:800;
+    font-style:normal;
+    font-size:clamp(16px,1.8vw,20px);
+    margin-bottom:10px;
+  }
+  .band-azul .quote-title{
+    color:#fff;
+    font-weight:800;
+    line-height:1.15;
+    font-size:clamp(28px,3.8vw,52px);
+    margin:0 0 12px;
+  }
+  .band-azul .author{
+    color:var(--text-azul-claro);
+    font-weight:800;
+    font-size:clamp(13px,1.6vw,18px);
+  }
+
+  /* ===== Cajón CELESTE (a sangre) ===== */
+  .band-celeste{
+    background:var(--celeste-base);
+    margin:0;                 /* sin márgenes (pegado al azul) */
+    padding:22px 0;           /* altura similar a referencia */
+    text-align:center;
+  }
+  .band-celeste .wrap{
+    max-width:var(--containerMax);
+    margin:0 auto;
+    padding:0 var(--gutter);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .sabias-logo{
+    width:min(520px,90%);
+    height:auto;
+    display:block;
+  }
+
+  /* ===== Sección ¿Sabías que? (cards) ===== */
   .sabias-que{padding:20px 0;background:#fff}
   .datos-curiosos{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
   .dato{
@@ -173,18 +222,11 @@
   /* ===== Responsive ===== */
   @media (max-width:980px){
     .bloque-noticias{grid-template-columns:repeat(2,1fr)}
-    .principal-imagen img{
-      width:125%;           /* un poco más sobrio en tablet */
-      transform:translateX(2%);
-    }
+    .principal-imagen img{width:125%; transform:translateX(2%);}
   }
   @media (max-width:720px){
     .principal{grid-template-columns:1fr}
-    .principal-imagen img{
-      width:100%;           /* móvil: ocupa todo sin recorte raro */
-      transform:none;
-      object-position:center;
-    }
+    .principal-imagen img{width:100%; transform:none; object-position:center;}
     .noticia img,.dato img{height:180px}
   }
   @media (max-width:640px){
@@ -244,7 +286,24 @@
   </div>
 </section>
 
-<!-- SABÍAS QUE -->
+<!-- CAJÓN AZUL -->
+<section class="band-azul">
+  <div class="wrap">
+    <div class="kicker-azul">Tren Lima Chosica</div>
+    <div class="quote-title">Ajusté el ancho fijo y centrado</div>
+    <div class="author">César Sandoval Pozo | Ministerio de Transportes y Comunicaciones</div>
+  </div>
+</section>
+
+<!-- CAJÓN CELESTE (sin margen superior para pegarse al azul) -->
+<section class="band-celeste">
+  <div class="wrap">
+    <!-- Espacio para enlazar la imagen del título ¿Sabías que? -->
+    <img class="sabias-logo" src="./img/sabias_titulo.png" alt="¿Sabías que?">
+  </div>
+</section>
+
+<!-- SABÍAS QUE (tarjetas) -->
 <section class="sabias-que">
   <div class="container">
     <div class="datos-curiosos">
