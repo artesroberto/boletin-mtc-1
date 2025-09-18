@@ -87,11 +87,13 @@
   }
   .principal-texto{
     display:flex;flex-direction:column;justify-content:center;
-    text-align:center;padding:40px
+    text-align:center;
+    /* menos aire arriba */
+    padding:24px 40px 28px;
   }
   .principal-texto .fixed{max-width:620px;margin:0 auto}
 
-  /* Imagen mano/telefono más grande e impactante */
+  /* Imagen mano/telefono (valores base; se sobrescriben en desktop abajo) */
   .principal-imagen{
     position:relative;
     display:flex;
@@ -100,12 +102,11 @@
     overflow:hidden;
   }
   .principal-imagen img{
-    width:800%;
+    width:120%;
     max-width:none;
     height:auto;
     object-fit:cover;
     object-position:center right;
-    transform:translateX(5%);
     display:block;
   }
 
@@ -246,6 +247,27 @@
   @media (max-width:640px){
     .bloque-noticias{grid-template-columns:1fr}
     .datos-curiosos{grid-template-columns:1fr}
+  }
+
+  /* === OVERRIDES: menos aire arriba y héroe casi a sangre en desktop === */
+  @media (min-width:980px){
+    /* menos aire en el texto del héroe */
+    .principal-texto{ padding:20px 40px 28px; }
+
+    /* que la columna de imagen tenga un poquito más de espacio */
+    .principal{ grid-template-columns:0.9fr 1.1fr; }
+
+    /* alinear imagen a la base y recortar a sangre */
+    .principal-imagen{ align-items:flex-end; overflow:hidden; }
+
+    .principal-imagen img{
+      width:160%;
+      object-position:right bottom;   /* base alineada */
+      transform:translateX(8%);       /* empuje hacia afuera */
+    }
+  }
+  @media (min-width:1280px){
+    .principal-imagen img{ width:180%; transform:translateX(10%); }
   }
 </style>
 </head>
